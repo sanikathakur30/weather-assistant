@@ -1,12 +1,62 @@
-# React + Vite
+# 🌤️ Weather Assistant Chatbot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive AI-powered Weather Assistant built with **React**, **Vite**, and **Tailwind CSS**. This chatbot interacts with the **Mastra Weather Agent API** to provide real-time weather-related information.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- AI Chat Interface for weather-related queries
+- Responsive design with mobile/tablet support
+- Dark/Light Mode toggle
+- Recent chat history with persistent local storage
+- Clear chat functionality
+- Built using **Vite** for lightning-fast development and builds
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- React
+- Vite
+- Tailwind CSS
+- Heroicons
+- Mastra Weather Agent API
+
+---
+
+## 📦 Setup Instructions
+
+**Prerequisites:**
+
+- Node.js 16+ recommended
+- npm or yarn
+
+**Steps:**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/sanikathakur30/weather-assistant.git
+   cd weather-assistant
+   Install dependencies: npm install
+   ```
+
+Start the development server: npm run dev
+
+Open your browser at: http://localhost:5173
+
+📁 Project Structure
+
+weather-assistant/
+├─ public/
+├─ src/
+│ ├─ components/
+│ │ ├─ ChatWindow.jsx
+│ │ ├─ MessageBubble.jsx
+│ │ ├─ MessageInput.jsx
+│ │ ├─ Loader.jsx
+│ │ ├─ PastChatHistory.jsx
+│ ├─ index.css
+│ ├─ main.jsx
+├─ package.json
+├─ vite.config.js
