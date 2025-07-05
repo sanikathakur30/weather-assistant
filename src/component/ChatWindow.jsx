@@ -3,7 +3,13 @@ import MessageBubble from "./MessageBubble";
 import MessageInput from "./MessageInput";
 import Loader from "./Loader";
 import PastChatHistory from "./PastChatHistory";
-import { TrashIcon, MoonIcon, SunIcon } from "@heroicons/react/24/solid";
+import {
+  TrashIcon,
+  MoonIcon,
+  SunIcon,
+  Bars3Icon,
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
 
 function cleanResponse(text) {
   return text
@@ -34,6 +40,7 @@ export default function ChatWindow() {
   const [error, setError] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [refreshHistory, setRefreshHistory] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const API_URL =
     "https://brief-thousands-sunset-9fcb1c78-485f-4967-ac04-2759a8fa1462.mastra.cloud/api/agents/weatherAgent/stream";
@@ -121,16 +128,18 @@ export default function ChatWindow() {
     localStorage.setItem("chatSessions", JSON.stringify(history));
     localStorage.removeItem("sessionMessages");
     setMessages([]);
-    setRefreshHistory((prev) => !prev); // trigger re-render
+    setRefreshHistory((prev) => !prev);
   };
 
   const handleLoadPastChat = (session) => {
     setMessages(session);
     localStorage.setItem("sessionMessages", JSON.stringify(session));
+    setSidebarOpen(false);
   };
 
   return (
-    <div className="flex h-screen w-full overflow-hidden p-2 md:p-4 bg-gray-50 dark:bg-gray-900">
+    <div className="flex h-screen w-full overflow-hidden p-2 md:p-4 bg-gray-50 dark:bg-gray-900 relative">
+      {/* Desktop Sidebar */}
       <div className="hidden md:block w-[300px] bg-gray-100 dark:bg-gray-800 p-4 border-r border-gray-300 dark:border-gray-700 overflow-y-auto rounded-lg mt-4 mx-2 md:ml-4">
         <h2 className="text-lg font-bold mb-4 text-gray-700 dark:text-white">
           Recent Conversation
@@ -141,12 +150,47 @@ export default function ChatWindow() {
         />
       </div>
 
+      {/* Hamburger Button */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-20 p-2 bg-gray-200 dark:bg-gray-700 rounded-full shadow hover:bg-gray-300 dark:hover:bg-gray-600"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        {sidebarOpen ? (
+          <XMarkIcon className="h-5 w-5 text-black dark:text-white" />
+        ) : (
+          <Bars3Icon className="h-5 w-5 text-black dark:text-white" />
+        )}
+      </button>
+
+      {/* Sidebar Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        ></div>
+      )}
+
+      {/* Sidebar Drawer for Mobile */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-100 dark:bg-gray-800 p-4 border-r border-gray-300 dark:border-gray-700 z-20 transform ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 md:hidden`}
+      >
+        <h2 className="text-lg font-bold mb-4 text-gray-700 dark:text-white">
+          Recent Conversation
+        </h2>
+        <PastChatHistory
+          onSelect={handleLoadPastChat}
+          refresh={refreshHistory}
+        />
+      </div>
+
+      {/* Main Chat Window */}
       <div className="flex flex-col flex-1 bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden mt-4 mx-2 md:ml-4">
         <div className="flex justify-between items-center p-4 border-b bg-gray-300 dark:bg-gray-700">
           <h1 className="font-bold text-lg text-gray-800 dark:text-white">
-            Weather Agent Chat
+            Weather Assistant
           </h1>
-
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setDarkMode(!darkMode)}
@@ -159,7 +203,6 @@ export default function ChatWindow() {
                 <MoonIcon className="h-5 w-5 text-black" />
               )}
             </button>
-
             <button
               onClick={handleClear}
               className="p-2 rounded-full hover:bg-white dark:hover:bg-gray-600 transition"
