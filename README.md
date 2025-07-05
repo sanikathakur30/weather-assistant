@@ -45,3 +45,4 @@ A responsive AI-powered Weather Assistant built with **React**, **Vite**, and **
 
 4. Open your browser at: http://localhost:5173
 
+🎥 [Demo Video](https://drive.google.com/file/d/10tRk25AHBnor1PDKLPNb6FzRVxLNGzzz/view?usp=drive_link)
