@@ -38,25 +38,10 @@ A responsive AI-powered Weather Assistant built with **React**, **Vite**, and **
    ```bash
    git clone https://github.com/sanikathakur30/weather-assistant.git
    cd weather-assistant
-   Install dependencies: npm install
    ```
+2. Install dependencies: npm install
 
-Start the development server: npm run dev
+3. Start the development server: npm run dev
 
-Open your browser at: http://localhost:5173
+4. Open your browser at: http://localhost:5173
 
-📁 Project Structure
-
-weather-assistant/
-├─ public/
-├─ src/
-│ ├─ components/
-│ │ ├─ ChatWindow.jsx
-│ │ ├─ MessageBubble.jsx
-│ │ ├─ MessageInput.jsx
-│ │ ├─ Loader.jsx
-│ │ ├─ PastChatHistory.jsx
-│ ├─ index.css
-│ ├─ main.jsx
-├─ package.json
-├─ vite.config.js
